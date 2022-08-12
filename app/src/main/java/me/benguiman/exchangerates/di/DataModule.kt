@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import me.benguiman.exchangerates.data.CurrencyService
+import me.benguiman.exchangerates.data.ExchangeRateService
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -14,11 +14,11 @@ import javax.inject.Singleton
 class DataModule {
     @Singleton
     @Provides
-    fun provideCurrencyService(): CurrencyService =
+    fun provideCurrencyService(): ExchangeRateService =
         Retrofit.Builder()
             .baseUrl("https://open.er-api.com/v6/")
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-            .create(CurrencyService::class.java)
+            .create(ExchangeRateService::class.java)
 
 }
