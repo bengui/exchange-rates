@@ -57,7 +57,7 @@ fun ExchangeRateItem(
     val context = LocalContext.current
     val flagResourceId = remember {
         context.resources.getIdentifier(
-            exchangeRate.twoLetterCountryCode,
+            exchangeRate.twoLetterCountryRegion,
             "drawable",
             context.packageName
         )

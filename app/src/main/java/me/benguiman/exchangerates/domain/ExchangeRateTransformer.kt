@@ -7,7 +7,7 @@ fun transformMapToExchangeRate(exchangeRateMap: Map<String, Double>): List<Excha
         ExchangeRate(
             currency = it.key,
             exchangeRate = it.value,
-            twoLetterCountryCode = "",
+            twoLetterCountryRegion = "",
             currencyName = ""
         )
     }
