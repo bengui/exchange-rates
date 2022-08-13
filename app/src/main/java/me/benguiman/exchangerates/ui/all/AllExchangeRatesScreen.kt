@@ -88,12 +88,20 @@ fun ExchangeRateItem(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    ExchangeRateItem(
-        exchangeRate = ExchangeRate(
-            "USD",
-            1.35,
-            "us",
-            "US Dollar"
+    ExchangeRateList(
+        exchangeRateList = listOf(
+            ExchangeRate(
+                "USD",
+                1.00,
+                "us",
+                "US Dollar"
+            ),
+            ExchangeRate(
+                "ARS",
+                134.46,
+                "ar",
+                "Argentinean Peso"
+            )
         )
     )
 }

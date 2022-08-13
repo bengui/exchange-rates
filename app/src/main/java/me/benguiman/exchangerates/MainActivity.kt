@@ -3,10 +3,12 @@ package me.benguiman.exchangerates
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Scaffold
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,24 +25,49 @@ class MainActivity : ComponentActivity() {
             ExchangeRatesApp()
         }
     }
+}
 
-    @Composable
-    private fun ExchangeRatesApp(
-        navController: NavHostController = rememberNavController()
-    ) {
-        ExchangeRatesTheme {
-            Scaffold(
-                bottomBar = {
-                    BottomAppBar {
-
-                    }
-                }
-            ) {
-                ExchangeRatesNavHost(navController)
-            }
+@Composable
+private fun ExchangeRatesApp(
+    navController: NavHostController = rememberNavController()
+) {
+    val currentScreen =
+        exchangeRatesScreens.find { navController.currentDestination?.route == it.route } ?: All
+    ExchangeRatesTheme {
+        Scaffold(
+            topBar = { ExchangeTopAppBar(currentScreen) },
+            bottomBar = { ExchangeBottomAppBar() }
+        ) {
+            ExchangeRatesNavHost(navController)
         }
     }
+}
 
+@Composable
+private fun ExchangeTopAppBar(currentScreen: ExchangeRatesDestination) {
+    TopAppBar {
+        Text(
+            stringResource(id = currentScreen.title),
+            modifier = Modifier.weight(1f),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+private fun ExchangeBottomAppBar() {
+    BottomAppBar {
+        Icon(
+            imageVector = Favorites.icon,
+            contentDescription = stringResource(id = Favorites.title),
+            modifier = Modifier.weight(1f)
+        )
+        Icon(
+            imageVector = All.icon,
+            contentDescription = stringResource(id = All.title),
+            modifier = Modifier.weight(1f)
+        )
+    }
 }
 
 @Composable
@@ -57,4 +84,10 @@ private fun ExchangeRatesNavHost(
             AllExchangeRatesScreen()
         }
     }
+}
+
+@Preview
+@Composable
+fun ExchangeRatesAppPreview() {
+    ExchangeRatesApp()
 }
