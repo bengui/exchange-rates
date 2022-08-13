@@ -13,7 +13,7 @@ import me.benguiman.exchangerates.domain.GetAllExchangeRatesUseCase
 import javax.inject.Inject
 
 @HiltViewModel
-class ExchangeRateViewModel @Inject constructor(
+class AllExchangeRatesViewModel @Inject constructor(
     private val getAllExchangeRatesUseCase: GetAllExchangeRatesUseCase
 ) : ViewModel() {
 
