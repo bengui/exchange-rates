@@ -79,7 +79,7 @@ fun ExchangeRateItem(
                 .padding(horizontal = 4.dp)
         )
         Text(
-            "${exchangeRate.currency} ${exchangeRate.exchangeRate}",
+            "${exchangeRate.currencyCode} ${exchangeRate.exchangeRate}",
             style = MaterialTheme.typography.h6
         )
     }
@@ -91,16 +91,18 @@ fun DefaultPreview() {
     ExchangeRateList(
         exchangeRateList = listOf(
             ExchangeRate(
-                "USD",
-                1.00,
-                "us",
-                "US Dollar"
+                currencyCode = "USD",
+                exchangeRate = 1.00,
+                twoLetterCountryRegion = "us",
+                currencyName = "US Dollar",
+                region = "UNITED STATES OF AMERICA"
             ),
             ExchangeRate(
-                "ARS",
-                134.46,
-                "ar",
-                "Argentinean Peso"
+                currencyCode = "ARS",
+                exchangeRate = 134.46,
+                twoLetterCountryRegion = "ar",
+                currencyName = "Argentinean Peso",
+                region = "ARGENTINA"
             )
         )
     )
