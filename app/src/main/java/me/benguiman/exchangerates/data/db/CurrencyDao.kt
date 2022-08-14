@@ -1,7 +1,6 @@
 package me.benguiman.exchangerates.data.db
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
@@ -14,8 +13,5 @@ interface CurrencyDao {
     fun findByCurrencyCode(currencyCode: String): CurrencyEntity
 
     @Insert
-    fun insertAll(vararg currencies: List<CurrencyEntity>)
-
-    @Delete
-    fun delete(currencyEntity: CurrencyEntity)
+    fun insertAll(currencies: List<CurrencyEntity>)
 }
