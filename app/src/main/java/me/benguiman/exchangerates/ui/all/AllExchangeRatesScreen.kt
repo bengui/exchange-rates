@@ -1,5 +1,6 @@
 package me.benguiman.exchangerates.ui.all
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,8 +18,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import me.benguiman.exchangerates.R
 import me.benguiman.exchangerates.data.ExchangeRate
 import me.benguiman.exchangerates.ui.AllExchangeRatesViewModel
+import java.util.*
 
 @Composable
 fun AllExchangeRatesScreen(
@@ -56,11 +59,18 @@ fun ExchangeRateItem(
 ) {
     val context = LocalContext.current
     val flagResourceId = remember {
-        context.resources.getIdentifier(
-            exchangeRate.twoLetterCountryRegion,
+        val resource = context.resources.getIdentifier(
+            exchangeRate.twoLetterCountryRegion.lowercase(Locale.US),
             "drawable",
             context.packageName
         )
+        //TODO DO flag resource is not valid
+        if (resource != 0) {
+            resource
+        } else {
+            //TODO add flag placeholder
+            R.drawable.ic_launcher_foreground
+        }
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -72,14 +82,23 @@ fun ExchangeRateItem(
             modifier = Modifier
                 .size(48.dp)
         )
-        Text(
-            exchangeRate.currencyName,
+        Column(
             modifier = Modifier
                 .weight(1f)
                 .padding(horizontal = 4.dp)
-        )
+        ) {
+
+            Text(exchangeRate.currencyName)
+            Text(
+                text = exchangeRate.region,
+                style = MaterialTheme.typography.overline
+            )
+
+        }
         Text(
-            "${exchangeRate.currencyCode} ${exchangeRate.exchangeRate}",
+            "${exchangeRate.currencyCode} ${
+                "%.2f".format(exchangeRate.exchangeRate)
+            }",
             style = MaterialTheme.typography.h6
         )
     }

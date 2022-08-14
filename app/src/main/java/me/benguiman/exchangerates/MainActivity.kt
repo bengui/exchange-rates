@@ -9,11 +9,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import me.benguiman.exchangerates.ui.AllExchangeRatesViewModel
 import me.benguiman.exchangerates.ui.all.AllExchangeRatesScreen
 import me.benguiman.exchangerates.ui.theme.ExchangeRatesTheme
 
@@ -81,7 +83,8 @@ private fun ExchangeRatesNavHost(
         modifier = modifier
     ) {
         composable(route = All.route) {
-            AllExchangeRatesScreen()
+            val viewModel = hiltViewModel<AllExchangeRatesViewModel>()
+            AllExchangeRatesScreen(viewModel)
         }
     }
 }
